@@ -9,6 +9,7 @@ export class City {
   latitude = 0;
   longitude = 0;
   name = "default";
+  
   x = 0;
   y = 0;
   airport_delay = 0;
@@ -44,15 +45,10 @@ export class City {
     const distance = Math.sqrt(
       Math.pow(distance_x, 2) + Math.pow(distance_y, 2)
     );
-    
-    const airplane_speed = 800; // Airplane speed en km/h
-    const total_delay = this.airport_delay + city.airport_delay;
-    const time_travel = (distance / airplane_speed) + (total_delay);
 
-    return {
-      distance: distance,
-      time_travel: time_travel,
-    };
+    //TODO Implement the delay feature
+    
+    return distance;
   }
 
   toString() {
