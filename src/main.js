@@ -1,8 +1,9 @@
 import { City } from './model/city.model.js';
 
-const bogota = new City('Bogota', 4.60971, -74.08175);
-const peru = new City('Peru', -9.189967, -75.015152)
+const bogota = new City('Bogota', 4.60971, -74.08175, 1);
+const lima = new City('Lima', -12.04318, -77.02824, 5)
 
 console.log(bogota);
-console.log(peru)
-console.log(bogota.distanceTo(peru));
+console.log(bogota.distanceTo(lima));
+console.log(lima);
+console.log(lima.distanceTo(bogota))

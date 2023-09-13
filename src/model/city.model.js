@@ -1,98 +1,61 @@
+import proj4 from 'proj4';
+
 /**
- * Represents a city with geographical coordinates and Cartesian coordinates.
+ *  UTM Zone 33N (WGS84)
  */
+proj4.defs('EPSG:25833', '+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
+
 export class City {
-    /**
-     * Latitude of the city in degrees.
-     * @type {number}
-     */
-    latitude = 0;
-  
-    /**
-     * Longitude of the city in degrees.
-     * @type {number}
-     */
-    longitude = 0;
-  
-    /**
-     * Name of the city.
-     * @type {string}
-     */
-    name = "default";
-  
-    /**
-     * Cartesian x-coordinate of the city.
-     * @type {number}
-     */
-    x = 0;
-  
-    /**
-     * Cartesian y-coordinate of the city.
-     * @type {number}
-     */
-    y = 0;
-  
-    /**
-     * Creates a new City instance.
-     * @param {string} name - The name of the city.
-     * @param {number} latitude - The latitude of the city in degrees.
-     * @param {number} longitude - The longitude of the city in degrees.
-     */
-    constructor(name, latitude, longitude) {
-      this.name = name;
-      this.latitude = latitude;
-      this.longitude = longitude;
-      // Calculate Cartesian coordinates
-      this.toCartesian();
-    }
-  
-    /**
-     * Calculates and sets the Cartesian coordinates (x, y) based on latitude and longitude.
-     */
-    toCartesian() {
-      const radius = 6371000; // Average Earth radius in meters
-      const latitude_radian = this.latitude * (Math.PI / 180);
-      const longitude_radian = this.longitude * (Math.PI / 180);
-  
-      this.x = radius * Math.cos(latitude_radian) * Math.cos(longitude_radian);
-      this.y = radius * Math.cos(latitude_radian) * Math.sin(longitude_radian);
-    }
-  
-    /**
-     * Get the x-coordinate of the city in Cartesian coordinates.
-     * @returns {number} The x-coordinate.
-     */
-    getX() {
-      return this.x;
-    }
-  
-    /**
-     * Get the y-coordinate of the city in Cartesian coordinates.
-     * @returns {number} The y-coordinate.
-     */
-    getY() {
-      return this.y;
-    }
-  
-    /**
-     * Calculates the distance to another city using Cartesian coordinates.
-     * @param {City} city - The target city to calculate the distance to.
-     * @returns {number} The distance in meters.
-     */
-    distanceTo(city) {
-      let distance_x = Math.abs(this.getX() - city.getX());
-      let distance_y = Math.abs(this.getY() - city.getY());
-  
-      return Math.sqrt(Math.pow(distance_x, 2) + Math.pow(distance_y, 2));
-    }
-  
-    /**
-     * Returns a string representation of the city, including its name, latitude, longitude,
-     * and Cartesian coordinates.
-     * @returns {string} A string representation of the city.
-     */
-    toString() {
-      return `City: ${this.name}\nLatitude: ${this.latitude} degrees\nLongitude: ${this.longitude} degrees\nCartesian Coordinates (x, y): (${this.x}, ${this.y})`;
-    }
+  latitude = 0;
+  longitude = 0;
+  name = "default";
+  x = 0;
+  y = 0;
+  airport_delay = 0;
+
+  constructor(name, latitude, longitude, airport_delay) {
+    this.name = name;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.airport_delay = airport_delay;
+    // Calculate Cartesian coordinates
+    this.toUTM();
   }
-  
+
+  toUTM() {
+    const coordsXY = proj4('EPSG:4326', 'EPSG:25833', [this.latitude, this.longitude]);
+
+    this.x = coordsXY[0] / 1000;
+    this.y = coordsXY[1] / 1000;
+  }
+
+  getX() {
+    return this.x;
+  }
+
+  getY() {
+    return this.y;
+  }
+
+  distanceTo(city) {
+    let distance_x = city.getX() - this.getX();
+    let distance_y = city.getY() - this.getY();
+
+    const distance = Math.sqrt(
+      Math.pow(distance_x, 2) + Math.pow(distance_y, 2)
+    );
+    
+    const airplane_speed = 800; // Airplane speed en km/h
+    const total_delay = this.airport_delay + city.airport_delay;
+    const time_travel = (distance / airplane_speed) + (total_delay);
+
+    return {
+      distance: distance,
+      time_travel: time_travel,
+    };
+  }
+
+  toString() {
+    return `City: ${this.name}\nLatitude: ${this.latitude} degrees\nLongitude: ${this.longitude} degrees\nCartesian Coordinates (x, y): (${this.x}, ${this.y})`;
+  }
+}
