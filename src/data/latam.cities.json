@@ -1,0 +1,12 @@
+[
+    ["Ciudad de México", 19.4326, -99.1332, 1, "Aeropuerto Internacional de la Ciudad de México", "MEX"],
+    ["Buenos Aires", -34.6118, -58.4173, 1, "Aeroparque Jorge Newbery", "AEP"],
+    ["São Paulo", -23.5505, -46.6333, 2, "Aeropuerto Internacional de Guarulhos", "GRU"],
+    ["Río de Janeiro", -22.9068, -43.1729, 1, "Aeropuerto Internacional Galeão", "GIG"],
+    ["Bogotá", 4.6097, -74.0817, 1, "Aeropuerto Internacional El Dorado", "BOG"],
+    ["Lima", -12.0464, -77.0428, 1, "Aeropuerto Internacional Jorge Chávez", "LIM"],
+    ["Santiago", -33.4489, -70.6693, 1, "Aeropuerto Internacional Arturo Merino Benítez", "SCL"],
+    ["Caracas", 10.4880, -66.8792, 1, "Aeropuerto Internacional Simón Bolívar", "CCS"],
+    ["Santo Domingo", 18.4861, -69.9312, 1, "Aeropuerto Internacional de las Américas", "SDQ"],
+    ["Montevideo", -34.9011, -56.1915, 1, "Aeropuerto Internacional de Carrasco", "MVD"]
+]

@@ -1,7 +1,7 @@
 import { GeneticAlgorithmController } from "./controller/genetic.algorithm.controller.js";
 import { MapController } from "./controller/map.controller.js";
 
-const dataCities = "./data/cities.json";
+const dataCities = "./data/latam.cities.json";
 
 async function loadData() {
     let dataLoaded = []

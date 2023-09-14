@@ -26,7 +26,6 @@ export class GeneticAlgorithmController {
         ["Los Angeles", 34.0522, -118.2437, 7, "Los Angeles International Airport", "LAX"],
       ];
       
-
     if (citiesData) {
       this.citiesData = citiesData;
     }
