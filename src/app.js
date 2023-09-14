@@ -1,36 +1,22 @@
-import { City } from "./model/city.model.js";
-import { TourManager } from "./model/tourmanager.model.js";
-import { Population } from "./model/population.model.js";
-import { GeneticAlgorithm } from "./model/genetic.algorithm.js";
+import { GeneticAlgorithmController } from "./controller/genetic.algorithm.controller.js";
+import { MapController } from "./controller/map.controller.js";
 
-const citiesData = [
-  ["Bogota", 4.60971, -74.08175, 3],
-  ["Lima", -12.04318, -77.02824, 5],
-  ["New York", 40.7128, -74.006, 8],
-  ["London", 51.5074, -0.1278, 7],
-  ["Paris", 48.8566, 2.3522, 6],
-  ["Tokyo", 35.682839, 139.759455, 10],
-  ["Sydney", -33.865143, 151.2099, 9],
-  ["Rio de Janeiro", -22.9068, -43.1729, 4],
-  ["Berlin", 52.52, 13.405, 6],
-  ["Amsterdam", 52.3676, 4.9041, 7]
-];
+const dataCities = "./data/cities.json";
 
-const numGenerations = 100;
-
-for (const cityData of citiesData) {
-  const city = new City(...cityData);
-  TourManager.addCity(city);
+async function loadData() {
+    let dataLoaded = []
+    await fetch(dataCities).then(response => response.json()).then(data => dataLoaded = data);
+    return dataLoaded
 }
 
-let population = new Population(50, true);
-console.log(`Initial distance: ${population.getFittest().getDistanceTime()}`);
+const citiesList = await loadData();
 
-for (let i = 0; i < numGenerations; i++) {
-  population = GeneticAlgorithm.evolvePopulation(population);
-}
+const algorithmController = new GeneticAlgorithmController(citiesList);
+const mapController = new MapController();
 
-console.log(`Final distance: ${population.getFittest().getDistanceTime()}`);
-console.log("Solution:");
-console.log(JSON.stringify(population.getFittest(), null, 2));
+// Pass all data from execute to the map controller
+mapController.setDataMap(algorithmController.runGeneticAlgorithm());
+mapController.initMap();
 
+// console.log(mapController.getCities());
+// console.log(mapController.getDataMap());

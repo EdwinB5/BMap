@@ -28,4 +28,5 @@ export const TourManager = {
   numberOfCities() {
     return this.destinationCities.length;
   },
+  
 };

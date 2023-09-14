@@ -14,13 +14,20 @@ export class City {
    * @param {string} name - The name of the city.
    * @param {number} latitude - The latitude coordinate of the city.
    * @param {number} longitude - The longitude coordinate of the city.
+   * @param {number} airportName - The airport name's
    * @param {number} airportDelay - The delay at the city's airport (in hours).
+   * @param {string} airportIATA - The airport IATA of the city's
    */
-  constructor(name, latitude, longitude, airportDelay) {
+  constructor(name, latitude, longitude, airportDelay, airportName, airportIATA) {
     this.name = name;
     this.latitude = latitude;
     this.longitude = longitude;
-    this.airportDelay = airportDelay;
+    this.airport = {
+      airportName,
+      airportDelay,
+      airportIATA, 
+    }
+    
     this.cityTraveled = {};
   }
 
@@ -49,7 +56,7 @@ export class City {
     const distance = this.haversine(city);
     const airplaneSpeed = 800; // Assume constant airplane speed in km/h
     const timeTo = distance / airplaneSpeed;
-    const timeDelay = timeTo + this.airportDelay;
+    const timeDelay = timeTo + this.airport.airportDelay;
 
     const toCity = city.name;
 
