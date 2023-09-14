@@ -1,7 +1,7 @@
 /**
  * Class Tour represents a tour of cities.
  */
-import { TourManager } from "./tourmanager.js";
+import { TourManager } from "./tourmanager.model.js";
 
 export class Tour {
   // Holds the tour of cities
@@ -9,7 +9,7 @@ export class Tour {
 
   // Cache
   fitness = 0;
-  distance = 0;
+  distanceTime = 0;
 
   /**
    * Constructor for Tour class.
@@ -67,9 +67,9 @@ export class Tour {
   setCity(tourPosition, city) {
     this.tour[tourPosition] = city;
 
-    // If the tour has been altered, reset the fitness and distance
+    // If the tour has been altered, reset the fitness and distanceTime
     this.fitness = 0;
-    this.distance = 0;
+    this.distanceTime = 0;
   }
 
   /**
@@ -78,18 +78,18 @@ export class Tour {
    */
   getFitness() {
     if (this.fitness === 0) {
-      this.fitness = 1 / this.getDistance();
+      this.fitness = 1 / this.getDistanceTime();
     }
 
     return this.fitness;
   }
 
   /**
-   * Calculate the total distance of the tour.
+   * Calculate the total distanceTime of the tour.
    * @returns {number} - The total distance of the tour.
    */
-  getDistance() {
-    if (this.distance === 0) {
+  getDistanceTime() {
+    if (this.distanceTime === 0) {
       let tourDistance = 0;
       for (let cityIndex = 0; cityIndex < this.tourSize(); cityIndex++) {
         let fromCity = this.getCity(cityIndex);
@@ -101,9 +101,9 @@ export class Tour {
         }
         tourDistance += fromCity.distanceTo(destinationCity).timeDelay;
       }
-      this.distance = tourDistance;
+      this.distanceTime = tourDistance;
     }
-    return this.distance;
+    return this.distanceTime;
   }
 
   /**

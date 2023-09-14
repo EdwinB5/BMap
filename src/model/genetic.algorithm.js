@@ -1,5 +1,5 @@
-import { Population } from "./population.js";
-import { Tour } from "./tour.js";
+import { Population } from "./population.model.js";
+import { Tour } from "./tour.model.js";
 
 /**
  * Class GA manages algorithms for evolving a population.

@@ -1,4 +1,4 @@
-import { Tour } from "./tour.js";
+import { Tour } from "./tour.model.js";
 
 /**
  * Represents a population of tours.
