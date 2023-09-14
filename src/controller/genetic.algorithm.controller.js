@@ -50,18 +50,18 @@ export class GeneticAlgorithmController {
     // Initialize the population with 50 routes and randomize them
     let population = new Population(50, true);
 
-    const initialDistance = population.getFittest().getDistanceTime();
+    const initialTimeDistance = population.getFittest().getDistanceTime();
 
     // Evolve the population for the specified number of generations
     for (let i = 0; i < this.numGenerations; i++) {
       population = GeneticAlgorithm.evolvePopulation(population);
     }
 
-    const finalDistance = population.getFittest().getDistanceTime();
+    const finalTimeDistance = population.getFittest().getDistanceTime();
 
     return {
-      initialDistance,
-      finalDistance,
+      initialTimeDistance,
+      finalTimeDistance,
       fittestTour: population.getFittest(),
     };
   }

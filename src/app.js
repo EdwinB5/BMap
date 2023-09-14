@@ -19,4 +19,4 @@ mapController.setDataMap(algorithmController.runGeneticAlgorithm());
 mapController.initMap();
 
 // console.log(mapController.getCities());
-// console.log(mapController.getDataMap());
+console.log(mapController.getDataMap());

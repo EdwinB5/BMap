@@ -1,13 +1,13 @@
 [
-    ["Bogota", 4.60971, -74.08175, 3, "El Dorado International Airport", "BOG"],
-    ["Lima", -12.04318, -77.02824, 2, "Jorge Chávez International Airport", "LIM"],
-    ["New York", 40.7128, -74.006, 1, "John F. Kennedy International Airport", "JFK"],
-    ["London", 51.5074, -0.1278, 4, "Heathrow Airport", "LHR"],
-    ["Paris", 48.8566, 2.3522, 2, "Charles de Gaulle Airport", "CDG"],
-    ["Tokyo", 35.682839, 139.759455, 4, "Narita International Airport", "NRT"],
-    ["Sydney", -33.865143, 151.2099, 1, "Sydney Airport", "SYD"],
-    ["Rio de Janeiro", -22.9068, -43.1729, 3, "Rio de Janeiro/Galeão International Airport", "GIG"],
-    ["Berlin", 52.52, 13.405, 1, "Berlin Brandenburg Airport", "BER"],
-    ["Amsterdam", 52.3676, 4.9041, 4, "Amsterdam Airport Schiphol", "AMS"]
-  ]
+  ["Bogota", 4.60971, -74.08175, 3, "El Dorado International Airport", "BOG"],
+  ["Lima", -12.04318, -77.02824, 2, "Jorge Chávez International Airport", "LIM"],
+  ["New York", 40.7128, -74.006, 1, "John F. Kennedy International Airport", "JFK"],
+  ["London", 51.5074, -0.1278, 4, "Heathrow Airport", "LHR"],
+  ["Paris", 48.8566, 2.3522, 2, "Charles de Gaulle Airport", "CDG"],
+  ["Tokyo", 35.682839, 139.759455, 4, "Narita International Airport", "NRT"],
+  ["Sydney", -33.865143, 151.2099, 1, "Sydney Airport", "SYD"],
+  ["Rio de Janeiro", -22.9068, -43.1729, 3, "Rio de Janeiro/Galeão International Airport", "GIG"],
+  ["Berlin", 52.52, 13.405, 1, "Berlin Brandenburg Airport", "BER"],
+  ["Amsterdam", 52.3676, 4.9041, 4, "Amsterdam Airport Schiphol", "AMS"]
+]
   
