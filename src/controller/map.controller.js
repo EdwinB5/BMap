@@ -1,5 +1,3 @@
-import { TourManager } from "../model/tourmanager.model.js";
-
 /**
  * MapController class for managing and displaying city data on a map.
  */
@@ -110,6 +108,14 @@ export class MapController {
     this.mapLayer.addLayer(marker);
   }
 
+  /**
+   * Formats a time duration in hours into a human-readable string.
+   * The function converts hours into minutes and returns a string representation
+   * in the format "Xh" if the duration is in hours or "Xh Ym" if it includes minutes.
+   * @function
+   * @param {number} hours - The time duration in hours.
+   * @returns {string} - A human-readable time string in the format "Xh" or "Xh Ym".
+   */
   formatTime(hours) {
     const minutes = Math.round(hours * 60);
 

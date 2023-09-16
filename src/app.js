@@ -40,6 +40,7 @@ tspButton.addEventListener("click", function (event) {
   mapController.setDataMap(algorithmController.runGeneticAlgorithm());
   // Initialize the TSP visualization on the map
   mapController.initMapTSP();
+  
   // Log the data map and city information to the console for debugging or analysis
   console.log(mapController.getDataMap());
   //console.log(mapController.cities);
