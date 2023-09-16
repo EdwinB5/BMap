@@ -1,3 +1,5 @@
+import { Config } from '../config.js';
+
 /**
  * Represents a city with geographical information.
  */
@@ -54,7 +56,7 @@ export class City {
    */
   distanceTo(city) {
     const distance = this.haversine(city);
-    const airplaneSpeed = 800; // Assume constant airplane speed in km/h
+    const airplaneSpeed = Config.airplane.speed; // Assume constant airplane speed in km/h
     const timeTo = distance / airplaneSpeed;
     const timeDelay = timeTo + this.airport.airportDelay;
 

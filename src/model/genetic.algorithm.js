@@ -1,14 +1,15 @@
 import { Population } from "./population.model.js";
 import { Tour } from "./tour.model.js";
+import { Config } from "../config.js";
 
 /**
  * Class GA manages algorithms for evolving a population.
  */
 export class GeneticAlgorithm {
   /* GA parameters */
-  static mutationRate = 0.015;
-  static tournamentSize = 5;
-  static elitism = true;
+  static mutationRate = Config.geneticAlgorithm.mutationRate;
+  static tournamentSize = Config.geneticAlgorithm.tournamentSize;
+  static elitism = Config.geneticAlgorithm.elitism;
 
   /**
    * Evolves a population over one generation.

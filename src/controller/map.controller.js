@@ -64,9 +64,11 @@ export class MapController {
     let firstCity = this.dataMap.fittestTour.tour[0];
 
     this.map.flyTo([firstCity.latitude, firstCity.longitude], 13, {
-      duration: 2,
+      duration: 2.5,
       easeLinearity: 0.25,
+      animate: true,
     });
+    
     // Add markers for each city on the map
     this.cities.forEach((city) => {
       this.addMark(city.latitude, city.longitude, city.name, city.airport);
