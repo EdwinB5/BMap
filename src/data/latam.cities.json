@@ -1,12 +1,102 @@
 [
-    ["Ciudad de México", 19.4326, -99.1332, 1, "Aeropuerto Internacional de la Ciudad de México", "MEX"],
-    ["Buenos Aires", -34.6118, -58.4173, 1, "Aeroparque Jorge Newbery", "AEP"],
-    ["São Paulo", -23.5505, -46.6333, 2, "Aeropuerto Internacional de Guarulhos", "GRU"],
-    ["Río de Janeiro", -22.9068, -43.1729, 1, "Aeropuerto Internacional Galeão", "GIG"],
-    ["Bogotá", 4.6097, -74.0817, 1, "Aeropuerto Internacional El Dorado", "BOG"],
-    ["Lima", -12.0464, -77.0428, 1, "Aeropuerto Internacional Jorge Chávez", "LIM"],
-    ["Santiago", -33.4489, -70.6693, 1, "Aeropuerto Internacional Arturo Merino Benítez", "SCL"],
-    ["Caracas", 10.4880, -66.8792, 1, "Aeropuerto Internacional Simón Bolívar", "CCS"],
-    ["Santo Domingo", 18.4861, -69.9312, 1, "Aeropuerto Internacional de las Américas", "SDQ"],
-    ["Montevideo", -34.9011, -56.1915, 1, "Aeropuerto Internacional de Carrasco", "MVD"]
+    {
+        "city": "Ciudad de México",
+        "lat": 19.4326,
+        "lng": -99.1332,
+        "airport": {
+            "iata": "MEX",
+            "name": "Aeropuerto Internacional de la Ciudad de México",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Buenos Aires",
+        "lat": -34.6118,
+        "lng": -58.4173,
+        "airport": {
+            "iata": "AEP",
+            "name": "Aeroparque Jorge Newbery",
+            "delay": 1
+        }
+    },
+    {
+        "city": "São Paulo",
+        "lat": -23.5505,
+        "lng": -46.6333,
+        "airport": {
+            "iata": "GRU",
+            "name": "Aeropuerto Internacional de Guarulhos",
+            "delay": 2
+        }
+    },
+    {
+        "city": "Río de Janeiro",
+        "lat": -22.9068,
+        "lng": -43.1729,
+        "airport": {
+            "iata": "GIG",
+            "name": "Aeropuerto Internacional Galeão",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Bogotá",
+        "lat": 4.6097,
+        "lng": -74.0817,
+        "airport": {
+            "iata": "BOG",
+            "name": "Aeropuerto Internacional El Dorado",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Lima",
+        "lat": -12.0464,
+        "lng": -77.0428,
+        "airport": {
+            "iata": "LIM",
+            "name": "Aeropuerto Internacional Jorge Chávez",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Santiago",
+        "lat": -33.4489,
+        "lng": -70.6693,
+        "airport": {
+            "iata": "SCL",
+            "name": "Aeropuerto Internacional Arturo Merino Benítez",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Caracas",
+        "lat": 10.4880,
+        "lng": -66.8792,
+        "airport": {
+            "iata": "CCS",
+            "name": "Aeropuerto Internacional Simón Bolívar",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Santo Domingo",
+        "lat": 18.4861,
+        "lng": -69.9312,
+        "airport": {
+            "iata": "SDQ",
+            "name": "Aeropuerto Internacional de las Américas",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Montevideo",
+        "lat": -34.9011,
+        "lng": -56.1915,
+        "airport": {
+            "iata": "MVD",
+            "name": "Aeropuerto Internacional de Carrasco",
+            "delay": 1
+        }
+    }
 ]

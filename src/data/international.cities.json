@@ -1,13 +1,102 @@
 [
-  ["Bogota", 4.60971, -74.08175, 3, "El Dorado International Airport", "BOG"],
-  ["Lima", -12.04318, -77.02824, 2, "Jorge Chávez International Airport", "LIM"],
-  ["New York", 40.7128, -74.006, 1, "John F. Kennedy International Airport", "JFK"],
-  ["London", 51.5074, -0.1278, 4, "Heathrow Airport", "LHR"],
-  ["Paris", 48.8566, 2.3522, 2, "Charles de Gaulle Airport", "CDG"],
-  ["Tokyo", 35.682839, 139.759455, 4, "Narita International Airport", "NRT"],
-  ["Sydney", -33.865143, 151.2099, 1, "Sydney Airport", "SYD"],
-  ["Rio de Janeiro", -22.9068, -43.1729, 3, "Rio de Janeiro/Galeão International Airport", "GIG"],
-  ["Berlin", 52.52, 13.405, 1, "Berlin Brandenburg Airport", "BER"],
-  ["Amsterdam", 52.3676, 4.9041, 4, "Amsterdam Airport Schiphol", "AMS"]
+  {
+    "city": "Bogota",
+    "lat": 4.60971,
+    "lng": -74.08175,
+    "airport": {
+      "iata": "BOG",
+      "name": "El Dorado International Airport",
+      "delay": 3
+    }
+  },
+  {
+    "city": "Lima",
+    "lat": -12.04318,
+    "lng": -77.02824,
+    "airport": {
+      "iata": "LIM",
+      "name": "Jorge Chávez International Airport",
+      "delay": 2
+    }
+  },
+  {
+    "city": "New York",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "airport": {
+      "iata": "JFK",
+      "name": "John F. Kennedy International Airport",
+      "delay": 1
+    }
+  },
+  {
+    "city": "London",
+    "lat": 51.5074,
+    "lng": -0.1278,
+    "airport": {
+      "iata": "LHR",
+      "name": "Heathrow Airport",
+      "delay": 4
+    }
+  },
+  {
+    "city": "Paris",
+    "lat": 48.8566,
+    "lng": 2.3522,
+    "airport": {
+      "iata": "CDG",
+      "name": "Charles de Gaulle Airport",
+      "delay": 2
+    }
+  },
+  {
+    "city": "Tokyo",
+    "lat": 35.682839,
+    "lng": 139.759455,
+    "airport": {
+      "iata": "NRT",
+      "name": "Narita International Airport",
+      "delay": 4
+    }
+  },
+  {
+    "city": "Sydney",
+    "lat": -33.865143,
+    "lng": 151.2099,
+    "airport": {
+      "iata": "SYD",
+      "name": "Sydney Airport",
+      "delay": 1
+    }
+  },
+  {
+    "city": "Rio de Janeiro",
+    "lat": -22.9068,
+    "lng": -43.1729,
+    "airport": {
+      "iata": "GIG",
+      "name": "Rio de Janeiro/Galeão International Airport",
+      "delay": 3
+    }
+  },
+  {
+    "city": "Berlin",
+    "lat": 52.52,
+    "lng": 13.405,
+    "airport": {
+      "iata": "BER",
+      "name": "Berlin Brandenburg Airport",
+      "delay": 1
+    }
+  },
+  {
+    "city": "Amsterdam",
+    "lat": 52.3676,
+    "lng": 4.9041,
+    "airport": {
+      "iata": "AMS",
+      "name": "Amsterdam Airport Schiphol",
+      "delay": 4
+    }
+  }
 ]
-  

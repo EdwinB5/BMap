@@ -1,0 +1,102 @@
+[
+    {
+        "city": "Buenos Aires",
+        "lat": -34.6118,
+        "lng": -58.4173,
+        "airport": {
+            "iata": "AEP",
+            "name": "Aeroparque Jorge Newbery",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Córdoba",
+        "lat": -31.4201,
+        "lng": -64.1888,
+        "airport": {
+            "iata": "COR",
+            "name": "Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio L.V. Taravella",
+            "delay": 2
+        }
+    },
+    {
+        "city": "Rosario",
+        "lat": -32.9511,
+        "lng": -60.6663,
+        "airport": {
+            "iata": "ROS",
+            "name": "Aeropuerto Internacional de Rosario - Islas Malvinas",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Mendoza",
+        "lat": -32.8895,
+        "lng": -68.8458,
+        "airport": {
+            "iata": "MDZ",
+            "name": "Aeropuerto Internacional Gobernador Francisco Gabrielli",
+            "delay": 2
+        }
+    },
+    {
+        "city": "San Juan",
+        "lat": -31.5375,
+        "lng": -68.5364,
+        "airport": {
+            "iata": "UAQ",
+            "name": "Aeropuerto Domingo Faustino Sarmiento",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Salta",
+        "lat": -24.7859,
+        "lng": -65.4117,
+        "airport": {
+            "iata": "SLA",
+            "name": "Aeropuerto Internacional Martín Miguel de Güemes",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Mardel Plata",
+        "lat": -38.0049,
+        "lng": -57.5549,
+        "airport": {
+            "iata": "MDQ",
+            "name": "Aeropuerto Internacional Astor Piazzolla",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Tucumán",
+        "lat": -26.8320,
+        "lng": -65.2226,
+        "airport": {
+            "iata": "TUC",
+            "name": "Aeropuerto Internacional Teniente Benjamín Matienzo",
+            "delay": 1
+        }
+    },
+    {
+        "city": "Santa Fe",
+        "lat": -31.6232,
+        "lng": -60.7026,
+        "airport": {
+            "iata": "SFN",
+            "name": "Aeropuerto de Santa Fe Sauce Viejo",
+            "delay": 1
+        }
+    },
+    {
+        "city": "La Plata",
+        "lat": -34.9206,
+        "lng": -57.9536,
+        "airport": {
+            "iata": "LPG",
+            "name": "Aeropuerto Internacional de La Plata",
+            "delay": 1
+        }
+    }
+]

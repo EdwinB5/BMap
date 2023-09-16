@@ -1,7 +1,7 @@
 import { GeneticAlgorithmController } from "./controller/genetic.algorithm.controller.js";
 import { MapController } from "./controller/map.controller.js";
 
-const dataCities = "./data/latam.cities.json";
+const dataCities = "./data/argentina.cities.json";
 
 const tspButton = document.getElementById("tsp");
 
@@ -40,7 +40,7 @@ tspButton.addEventListener("click", function (event) {
   mapController.setDataMap(algorithmController.runGeneticAlgorithm());
   // Initialize the TSP visualization on the map
   mapController.initMapTSP();
-  
+
   // Log the data map and city information to the console for debugging or analysis
   console.log(mapController.getDataMap());
   //console.log(mapController.cities);

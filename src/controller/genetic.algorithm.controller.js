@@ -86,8 +86,11 @@ export class GeneticAlgorithmController {
     TourManager.clearTour();
     // Initialize the TourManager with cities
     for (const cityData of this.citiesData) {
-      const city = new City(...cityData);
-      TourManager.addCity(city);
+      const { city, lat, lng, airport } = cityData;
+      const { iata, name, delay } = airport;
+
+      const cityInstance = new City(city, lat, lng, delay, name, iata);
+      TourManager.addCity(cityInstance);
     }
 
     // Initialize the population with 50 routes and randomize them
