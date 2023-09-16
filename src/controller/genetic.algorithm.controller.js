@@ -13,19 +13,61 @@ export class GeneticAlgorithmController {
      * Modify this array to include the cities you want to optimize the route for.
      */
     this.citiesData = [
-        ["Bogota", 4.60971, -74.08175, 3, "El Dorado International Airport", "BOG"],
-        ["Lima", -12.04318, -77.02824, 5, "Jorge Chávez International Airport", "LIM"],
-        ["New York", 40.7128, -74.006, 8, "John F. Kennedy International Airport", "JFK"],
-        ["London", 51.5074, -0.1278, 7, "Heathrow Airport", "LHR"],
-        ["Paris", 48.8566, 2.3522, 6, "Charles de Gaulle Airport", "CDG"],
-        ["Tokyo", 35.682839, 139.759455, 10, "Narita International Airport", "NRT"],
-        ["Sydney", -33.865143, 151.2099, 9, "Sydney Airport", "SYD"],
-        ["Rio de Janeiro", -22.9068, -43.1729, 4, "Rio de Janeiro/Galeão International Airport", "GIG"],
-        ["Berlin", 52.52, 13.405, 6, "Berlin Brandenburg Airport", "BER"],
-        ["Amsterdam", 52.3676, 4.9041, 7, "Amsterdam Airport Schiphol", "AMS"],
-        ["Los Angeles", 34.0522, -118.2437, 7, "Los Angeles International Airport", "LAX"],
-      ];
-      
+      [
+        "Bogota",
+        4.60971,
+        -74.08175,
+        3,
+        "El Dorado International Airport",
+        "BOG",
+      ],
+      [
+        "Lima",
+        -12.04318,
+        -77.02824,
+        5,
+        "Jorge Chávez International Airport",
+        "LIM",
+      ],
+      [
+        "New York",
+        40.7128,
+        -74.006,
+        8,
+        "John F. Kennedy International Airport",
+        "JFK",
+      ],
+      ["London", 51.5074, -0.1278, 7, "Heathrow Airport", "LHR"],
+      ["Paris", 48.8566, 2.3522, 6, "Charles de Gaulle Airport", "CDG"],
+      [
+        "Tokyo",
+        35.682839,
+        139.759455,
+        10,
+        "Narita International Airport",
+        "NRT",
+      ],
+      ["Sydney", -33.865143, 151.2099, 9, "Sydney Airport", "SYD"],
+      [
+        "Rio de Janeiro",
+        -22.9068,
+        -43.1729,
+        4,
+        "Rio de Janeiro/Galeão International Airport",
+        "GIG",
+      ],
+      ["Berlin", 52.52, 13.405, 6, "Berlin Brandenburg Airport", "BER"],
+      ["Amsterdam", 52.3676, 4.9041, 7, "Amsterdam Airport Schiphol", "AMS"],
+      [
+        "Los Angeles",
+        34.0522,
+        -118.2437,
+        7,
+        "Los Angeles International Airport",
+        "LAX",
+      ],
+    ];
+
     if (citiesData) {
       this.citiesData = citiesData;
     }
@@ -41,6 +83,7 @@ export class GeneticAlgorithmController {
    * Run the genetic algorithm to optimize the route for the cities.
    */
   runGeneticAlgorithm() {
+    TourManager.clearTour();
     // Initialize the TourManager with cities
     for (const cityData of this.citiesData) {
       const city = new City(...cityData);

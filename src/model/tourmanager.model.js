@@ -28,5 +28,12 @@ export const TourManager = {
   numberOfCities() {
     return this.destinationCities.length;
   },
-  
+
+  /**
+   * Clears the list of destination cities in the tour.
+   * @function
+   */
+  clearTour() {
+    this.destinationCities = [];
+  },
 };

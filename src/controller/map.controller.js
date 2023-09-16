@@ -10,13 +10,16 @@ export class MapController {
   cities = [];
   /** @type {Object} The Leaflet map object. */
   map = null;
+  /** @type {Object} The Leaflet map layer for elements. */
+  mapLayer = null;
 
   /**
    * Create a new MapController instance.
    */
   constructor() {
     // Initialize the MapController with destination cities from TourManager
-    this.cities = TourManager.destinationCities;
+    this.cities = [];
+    this.mapLayer = L.layerGroup();
   }
 
   /**
@@ -25,6 +28,7 @@ export class MapController {
    */
   setDataMap(dataMap) {
     this.dataMap = dataMap;
+    this.cities = dataMap.fittestTour.tour;
   }
 
   /**
@@ -39,14 +43,8 @@ export class MapController {
    * Initialize the map with markers and polygons.
    */
   initMap() {
-    // Get the first city from the fittest tour for map centering
-    let firstCity = this.dataMap.fittestTour.tour[0];
-
     // Create a Leaflet map with initial view centered on the first city
-    this.map = L.map("map").setView(
-      [firstCity.latitude, firstCity.longitude],
-      13
-    );
+    this.map = L.map("map").setView([-33, -70], 13);
 
     // Add a tile layer with OpenStreetMap data
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -54,7 +52,23 @@ export class MapController {
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(this.map);
+  }
 
+  /**
+   * Initializes the Traveling Salesman Problem (TSP) visualization on the map.
+   * Centers the map on the first city of the fittest tour, adds markers for each city,
+   * and connects cities with polygons based on the fittest tour.
+   * @function
+   */
+  initMapTSP() {
+    // Get the first city from the fittest tour for map centering
+
+    let firstCity = this.dataMap.fittestTour.tour[0];
+
+    this.map.flyTo([firstCity.latitude, firstCity.longitude], 13, {
+      duration: 2,
+      easeLinearity: 0.25,
+    });
     // Add markers for each city on the map
     this.cities.forEach((city) => {
       this.addMark(city.latitude, city.longitude, city.name, city.airport);
@@ -70,6 +84,8 @@ export class MapController {
       }
       this.addPolygon(citiesTour[i], citiesTour[i + 1]);
     }
+
+    this.mapLayer.addTo(this.map);
   }
 
   /**
@@ -80,7 +96,7 @@ export class MapController {
    * @param {Object} airport - The airport information object.
    */
   addMark(latitude, longitude, name, airport) {
-    let marker = L.marker([latitude, longitude]).addTo(this.map);
+    let marker = L.marker([latitude, longitude]);
     marker.bindPopup(
       `City: ${name}, Latitude: ${
         Math.round(latitude * 100) / 100
@@ -90,6 +106,8 @@ export class MapController {
         airport.airportDelay
       }h`
     );
+
+    this.mapLayer.addLayer(marker);
   }
 
   formatTime(hours) {
@@ -121,7 +139,7 @@ export class MapController {
     const polyline = L.polyline([
       [city.latitude, city.longitude],
       [cityTravel.latitude, cityTravel.longitude],
-    ]).addTo(this.map);
+    ]);
 
     // Set a random color for the polyline
     const color = this.getRandomColor();
@@ -149,7 +167,10 @@ export class MapController {
           }),
         },
       ],
-    }).addTo(this.map);
+    });
+
+    this.mapLayer.addLayer(polyline);
+    this.mapLayer.addLayer(arrowDecorator);
   }
 
   /**
@@ -161,5 +182,14 @@ export class MapController {
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r},${g},${b})`;
+  }
+
+  /**
+   * Clears all elements from the map.
+   * @function
+   */
+  cleanMap() {
+    this.map.removeLayer(this.mapLayer);
+    this.mapLayer = L.layerGroup();
   }
 }
