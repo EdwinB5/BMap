@@ -2,6 +2,7 @@ import { City } from "../model/city.model.js";
 import { TourManager } from "../model/tourmanager.model.js";
 import { Population } from "../model/population.model.js";
 import { GeneticAlgorithm } from "../model/genetic.algorithm.js";
+import { Config } from "../config.js";
 
 /**
  * A controller class for running a genetic algorithm on a set of cities.
@@ -76,7 +77,7 @@ export class GeneticAlgorithmController {
      * The number of generations for the genetic algorithm to run.
      * Adjust this value to control the number of iterations.
      */
-    this.numGenerations = 100;
+    this.numGenerations = Config.geneticAlgorithm.numGenerations;
   }
 
   /**
@@ -93,8 +94,11 @@ export class GeneticAlgorithmController {
       TourManager.addCity(cityInstance);
     }
 
-    // Initialize the population with 50 routes and randomize them
-    let population = new Population(50, true);
+    // Initialize the population with n routes and randomize them
+    let population = new Population(
+      Config.geneticAlgorithm.populationSize,
+      true
+    );
 
     const initialTimeDistance = population.getFittest().getDistanceTime();
 
