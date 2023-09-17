@@ -16,7 +16,15 @@ export const Config = {
     tsp: {
       duration: 0.5,
       easeLinearity: 0.25,
-      animate: true
-    }
-  }
+      animate: true,
+      file: 'latam.cities'
+    },
+    gps: {
+      zoom: 3,
+      duration: 1.5,
+      easeLinearity: 0.25,
+      animate: true,
+      file: 'gps'
+    },
+  },
 };

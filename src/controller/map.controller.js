@@ -79,7 +79,6 @@ export class MapController {
    */
   initMapTSP() {
     // Get the first city from the fittest tour for map centering
-
     let firstCity = this.dataMap.fittestTour.tour[0];
 
     this.map.flyTo(
@@ -111,19 +110,29 @@ export class MapController {
     this.mapLayer.addTo(this.map);
   }
 
-  initGPSMap(trilaterate) {
-    this.map.flyTo([0, 0], 2, {
-      duration: 2.5,
-      easeLinearity: 0.25,
-      animate: true,
-    });
-
+  /**
+   * Initializes the GPS map with satellite circles, a marker at the specified GPS location, and additional location information.
+   *
+   * @param {Object} locationGPS - An object containing GPS location information with 'lat' and 'lng' properties.
+   * @param {Object} infoGPS - An object containing additional location information.
+   */
+  initGPSMap(locationGPS, infoGPS) {
+    // Add satellite circles to the map based on satellite data.
     this.satellites.forEach((satellite) => {
-      this.addCircle(satellite.lat, satellite.lon, satellite.distance * 1000);
+      this.addCircle(satellite.lat, satellite.lng, satellite.distance);
     });
 
-    // this.addMark(trilaterate.lat, trilaterate.lon);
+    // Fly to the specified GPS location on the map.
+    this.map.flyTo([locationGPS.lat, locationGPS.lng], Config.map.gps.zoom, {
+      duration: Config.map.gps.duration,
+      easeLinearity: Config.map.gps.easeLinearity,
+      animate: Config.map.gps.animate,
+    });
 
+    // Add a marker at the specified GPS location with additional location information.
+    this.addMark(locationGPS.lat, locationGPS.lng, null, null, infoGPS);
+
+    // Add the map layer to the map.
     this.mapLayer.addTo(this.map);
   }
 
@@ -168,21 +177,27 @@ export class MapController {
    * @param {string} name - The name of the city.
    * @param {Object} airport - The airport information object.
    */
-  addMark(latitude, longitude, name, airport) {
+  addMark(latitude, longitude, name, airport, info = null) {
     const color = this.getRandomColor();
     let marker = L.marker([latitude, longitude]);
     try {
       marker.bindPopup(
         `City: ${name}, Latitude: ${
           Math.round(latitude * 100) / 100
-        }°, Longitude: ${longitude}°, Airport: ${
+        }°, Longitude: ${Math.round(longitude * 100) / 100}°, Airport: ${
           airport.airportName
         }, Airport IATA: ${airport.airportIATA}, Airport Delay: ${
           airport.airportDelay
         }h`
       );
     } catch (error) {
-      console.log(error);
+      marker.bindPopup(
+        `Latitude: ${Math.round(latitude * 100) / 100}, Longitude: ${
+          Math.round(longitude * 100) / 100
+        }, Country: ${info.country}, Village: ${info.village}, District: ${
+          info.district
+        }, Subdistrict: ${info.subdistrict}, State: ${info.state}`
+      );
     }
     this.mapLayer.addLayer(marker);
   }

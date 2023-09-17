@@ -1,21 +1,17 @@
 import { GeneticAlgorithmController } from "./controller/genetic.algorithm.controller.js";
 import { MapController } from "./controller/map.controller.js";
 import { GPSController } from "./controller/gps.controller.js";
+import { Config } from "./config.js";
+import { fetchData } from "./utils/fetch.js";
 
-const dataCities = "./data/latam.cities.json";
+const dataCities = `./data/${Config.map.tsp.file}.json`;
+const gpsData = `./data/${Config.map.gps.file}.json`;
 
 const tspButton = document.getElementById("tsp");
 const gpsButton = document.getElementById("gps");
 
-async function loadData() {
-  let dataLoaded = [];
-  await fetch(dataCities)
-    .then((response) => response.json())
-    .then((data) => (dataLoaded = data));
-  return dataLoaded;
-}
-
-const citiesList = await loadData();
+const citiesList = await fetchData(dataCities);
+const gpsCoords = await fetchData(gpsData);
 
 const mapController = new MapController();
 const algorithmController = new GeneticAlgorithmController(citiesList);
@@ -35,51 +31,45 @@ mapController.initMap();
  * @param {Event} event - The click event object.
  */
 tspButton.addEventListener("click", function (event) {
-  // Prevent the default behavior of the button (e.g., form submission)
   event.preventDefault();
-  // Clear the map by removing all existing elements
   mapController.cleanMap();
-  // Run the genetic algorithm to generate a TSP solution and set the data in the map controller
   mapController.setDataMap(algorithmController.runGeneticAlgorithm());
-  // Initialize the TSP visualization on the map
   mapController.initMapTSP();
-
   // Log the data map and city information to the console for debugging or analysis
   console.log(mapController.getDataMap());
   //console.log(mapController.cities);
-  
 });
 
-const gpsCoords = [
-  {
-    lat: 24.711454873635766,
-    lon: 46.67438218019588,
-    distance: 977.69,
-  },
-  {
-    lat: 39.65467179595615,
-    lon: 66.97572083948319,
-    distance: 2169.86,
-  },
-  {
-    lat: 40.78689100382049,
-    lon: 14.368456432286543,
-    distance: 2749.4,
-  },
-];
-
-gpsButton.addEventListener("click", function (event) {
+/**
+ * Event listener for the GPS button click event. When the button is clicked,
+ * it performs the following actions:
+ * 1. Prevents the default form submission behavior (if applicable).
+ * 2. Cleans the existing map display using the mapController.
+ * 3. Sets satellite data using the GPS controller.
+ * 4. Initializes the GPS map display with updated GPS location and location information.
+ * 5. Logs the GPS location and location information to the console.
+ *
+ * @param {Event} event - The click event object.
+ */
+gpsButton.addEventListener("click", async function (event) {
   event.preventDefault();
   mapController.cleanMap();
   mapController.setSatelliteData(gpsController.setData(gpsCoords).getData());
-  mapController.initGPSMap(gpsController.trilaterate());
-  console.log(mapController.getSatelliteData());
+  mapController.initGPSMap(
+    gpsController.gpsLocation(),
+    await gpsController.getLocationInfo()
+  );
+  // Log the data map and satellite information to the console for debugging or analysis
+  console.log(
+    gpsController.gpsLocation(),
+    await gpsController.getLocationInfo()
+  );
 });
 
 /**
  * Get the zoom map and set to fly function
  */
-mapController.getMap().on("zoomend", function() {
+mapController.getMap().on("zoomend", function () {
   const currentZoom = mapController.getMap().getZoom();
   mapController.setCurrentZoom(currentZoom);
-})
+});
