@@ -1,15 +1,14 @@
+import { Config } from "../config.js";
+
 /**
  * MapController class for managing and displaying city data on a map.
  */
 export class MapController {
-  /** @type {Object} The data map for the controller. */
   dataMap = {};
-  /** @type {Array} An array of city data. */
   cities = [];
-  /** @type {Object} The Leaflet map object. */
   map = null;
-  /** @type {Object} The Leaflet map layer for elements. */
   mapLayer = null;
+  satellites = null;
 
   /**
    * Create a new MapController instance.
@@ -18,6 +17,24 @@ export class MapController {
     // Initialize the MapController with destination cities from TourManager
     this.cities = [];
     this.mapLayer = L.layerGroup();
+    this.satellites = [];
+    this.currentZoom = 0;
+  }
+
+  /**
+   * Set the current zoom level for the map.
+   * @param {number} zoom - The zoom level to set.
+   */
+  setCurrentZoom(zoom) {
+    this.currentZoom = zoom;
+  }
+
+  /**
+   * Get the map object.
+   * @returns {L.Map} - The Leaflet map object.
+   */
+  getMap() {
+    return this.map;
   }
 
   /**
@@ -42,14 +59,16 @@ export class MapController {
    */
   initMap() {
     // Create a Leaflet map with initial view centered on the first city
-    this.map = L.map("map").setView([-33, -70], 13);
+    this.map = L.map("map").setView([-33, -70], Config.map.zoom);
 
     // Add a tile layer with OpenStreetMap data
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
+      maxZoom: Config.map.maxZoom,
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(this.map);
+
+    this.map.setMinZoom(Config.map.minZoom);
   }
 
   /**
@@ -63,12 +82,16 @@ export class MapController {
 
     let firstCity = this.dataMap.fittestTour.tour[0];
 
-    this.map.flyTo([firstCity.latitude, firstCity.longitude], 13, {
-      duration: 2.5,
-      easeLinearity: 0.25,
-      animate: true,
-    });
-    
+    this.map.flyTo(
+      [firstCity.latitude, firstCity.longitude],
+      this.currentZoom,
+      {
+        duration: Config.map.tsp.duration,
+        easeLinearity: Config.map.tsp.easeLinearity,
+        animate: Config.map.tsp.animate,
+      }
+    );
+
     // Add markers for each city on the map
     this.cities.forEach((city) => {
       this.addMark(city.latitude, city.longitude, city.name, city.airport);
@@ -79,13 +102,63 @@ export class MapController {
 
     for (let i = 0; i <= citiesTour.length; i++) {
       if (i === citiesTour.length - 1) {
-        this.addPolygon(citiesTour[i], citiesTour[0]);
+        this.addPolyline(citiesTour[i], citiesTour[0]);
         break;
       }
-      this.addPolygon(citiesTour[i], citiesTour[i + 1]);
+      this.addPolyline(citiesTour[i], citiesTour[i + 1]);
     }
 
     this.mapLayer.addTo(this.map);
+  }
+
+  initGPSMap(trilaterate) {
+    this.map.flyTo([0, 0], 2, {
+      duration: 2.5,
+      easeLinearity: 0.25,
+      animate: true,
+    });
+
+    this.satellites.forEach((satellite) => {
+      this.addCircle(satellite.lat, satellite.lon, satellite.distance * 1000);
+    });
+
+    // this.addMark(trilaterate.lat, trilaterate.lon);
+
+    this.mapLayer.addTo(this.map);
+  }
+
+  /**
+   * Add a circle to the map based on a given latitude, longitude, and radius (distance).
+   * @param {number} latitude - The latitude coordinate for the center of the circle.
+   * @param {number} longitude - The longitude coordinate for the center of the circle.
+   * @param {number} distance - The radius (distance) of the circle in meters.
+   */
+  addCircle(latitude, longitude, distance) {
+    const color = this.getRandomColor();
+    let circle = L.circle([latitude, longitude], {
+      color: color,
+      fillColor: color,
+      fillOpacity: 0.5,
+      radius: distance,
+    });
+
+    this.mapLayer.addLayer(circle);
+  }
+
+  /**
+   * Set GPS satellite data to be used in the map.
+   * @param {Array} satellites - An array of GPS satellite data with latitude, longitude, and other properties.
+   */
+  setSatelliteData(satellites) {
+    this.satellites = satellites;
+  }
+
+  /**
+   * Get the stored GPS satellite data.
+   * @returns {Array} - An array of GPS satellite data with latitude, longitude, and other properties.
+   */
+  getSatelliteData() {
+    return this.satellites;
   }
 
   /**
@@ -96,17 +169,21 @@ export class MapController {
    * @param {Object} airport - The airport information object.
    */
   addMark(latitude, longitude, name, airport) {
+    const color = this.getRandomColor();
     let marker = L.marker([latitude, longitude]);
-    marker.bindPopup(
-      `City: ${name}, Latitude: ${
-        Math.round(latitude * 100) / 100
-      }°, Longitude: ${longitude}°, Airport: ${
-        airport.airportName
-      }, Airport IATA: ${airport.airportIATA}, Airport Delay: ${
-        airport.airportDelay
-      }h`
-    );
-
+    try {
+      marker.bindPopup(
+        `City: ${name}, Latitude: ${
+          Math.round(latitude * 100) / 100
+        }°, Longitude: ${longitude}°, Airport: ${
+          airport.airportName
+        }, Airport IATA: ${airport.airportIATA}, Airport Delay: ${
+          airport.airportDelay
+        }h`
+      );
+    } catch (error) {
+      console.log(error);
+    }
     this.mapLayer.addLayer(marker);
   }
 
@@ -136,12 +213,13 @@ export class MapController {
   }
 
   /**
-   * Add a polygon connecting two cities on the map.
+   * Add a polyline connecting two cities on the map.
    * @param {Object} city - The starting city object.
    * @param {Object} cityTravel - The destination city object.
    */
-  addPolygon(city, cityTravel) {
+  addPolyline(city, cityTravel) {
     const roundedDistance = Math.round(city.cityTraveled.distance * 100) / 100;
+    const opacity = 0.5;
 
     // Create a polyline connecting two cities
     const polyline = L.polyline([
@@ -166,7 +244,7 @@ export class MapController {
     const arrowDecorator = L.polylineDecorator(polyline, {
       patterns: [
         {
-          offset: "100%",
+          offset: "10%",
           repeat: 100,
           symbol: L.Symbol.arrowHead({
             pixelSize: 20,
@@ -177,8 +255,8 @@ export class MapController {
       ],
     });
 
-    this.mapLayer.addLayer(polyline);
     this.mapLayer.addLayer(arrowDecorator);
+    this.mapLayer.addLayer(polyline);
   }
 
   /**

@@ -9,4 +9,14 @@ export const Config = {
   airplane: {
     speed: 800,
   },
+  map: {
+    zoom: 10,
+    maxZoom: 7,
+    minZoom: 3,
+    tsp: {
+      duration: 0.5,
+      easeLinearity: 0.25,
+      animate: true
+    }
+  }
 };

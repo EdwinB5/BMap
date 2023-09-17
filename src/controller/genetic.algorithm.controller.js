@@ -10,7 +10,7 @@ import { Config } from "../config.js";
 export class GeneticAlgorithmController {
   constructor(citiesData) {
     /**
-     * An array of city data in the format [name, latitude, longitude, time].
+     * An array of city data
      * Modify this array to include the cities you want to optimize the route for.
      */
     this.citiesData = [
