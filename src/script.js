@@ -110,7 +110,7 @@ async function tspContent(data, container, url) {
   const tourCities = data.fittestTour.tour;
 
   // Load the TSP content template HTML into the container
-  container.load(url, () => {
+  await container.load(url, () => {
     // Set the initial and final time distances in the HTML
     $("#init-distance").text(formatTime(data.initialTimeDistance));
     $("#final-distance").text(formatTime(data.finalTimeDistance));
