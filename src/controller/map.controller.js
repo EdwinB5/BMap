@@ -1,4 +1,5 @@
 import { Config } from "../config.js";
+import { formatTime } from "../utils/time.js";
 
 /**
  * MapController class for managing and displaying city data on a map.
@@ -203,31 +204,6 @@ export class MapController {
   }
 
   /**
-   * Formats a time duration in hours into a human-readable string.
-   * The function converts hours into minutes and returns a string representation
-   * in the format "Xh" if the duration is in hours or "Xh Ym" if it includes minutes.
-   * @function
-   * @param {number} hours - The time duration in hours.
-   * @returns {string} - A human-readable time string in the format "Xh" or "Xh Ym".
-   */
-  formatTime(hours) {
-    const minutes = Math.round(hours * 60);
-
-    if (minutes < 60) {
-      return `${minutes}m`;
-    } else {
-      const hoursPart = Math.floor(minutes / 60);
-      const minutesPart = minutes % 60;
-
-      if (minutesPart === 0) {
-        return `${hoursPart}h`;
-      } else {
-        return `${hoursPart}h ${minutesPart}m`;
-      }
-    }
-  }
-
-  /**
    * Add a polyline connecting two cities on the map.
    * @param {Object} city - The starting city object.
    * @param {Object} cityTravel - The destination city object.
@@ -250,9 +226,9 @@ export class MapController {
     polyline.bindPopup(
       `Origin: ${city.name}, Destination: ${
         city.cityTraveled.city
-      }, Distance: ${roundedDistance}km, Time fly: ${this.formatTime(
+      }, Distance: ${roundedDistance}km, Time fly: ${formatTime(
         city.cityTraveled.timeTo
-      )}, Time with delay: ${this.formatTime(city.cityTraveled.timeDelay)}`
+      )}, Time with delay: ${formatTime(city.cityTraveled.timeDelay)}`
     );
 
     // Create a decorator layer to add arrow symbols to the line

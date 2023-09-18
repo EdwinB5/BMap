@@ -18,34 +18,31 @@
     <!-- Navbar content-->
     <div class="flex-1 text-center">
       <h1 class="text-3xl font-bold p-5">BMap</h1>
-      <div class="flex justify-center mb-5">
-       
-      </div>
+      <div class="flex justify-center mb-5"></div>
     </div>
 
-
-    <div class='sidebar'>
-
-      <div class='heading'>
-        <h1>Ultimas Locaciones</h1>
+    <div class="sidebar">
+      <div class="heading">
+        <h1>Last locations</h1>
       </div>
-      <div id='listings' class='listings'>
-
+      <div id="listings" class="listings">
         <div id="cont">
           <div class="icon">+</div>
           <div class="menu">
-            <div class="menu-item"  id="tsp" style="background:#0e4e29;"><a href="#">TSP</a></div>
-            <div class="menu-item" id="gps" style="background:#1b5881;"><a href="#">GPS</a></div>
-            
+            <div class="menu-item" id="tsp" style="background: #0e4e29">
+              <a href="#">TSP</a>
+            </div>
+            <div class="menu-item" id="gps" style="background: #1b5881">
+              <a href="#">GPS</a>
+            </div>
           </div>
         </div>
+        <div id="sidebar-content"></div>
       </div>
-    </div> 
-      <div id="map" class="map">
-      </div>
-      <div id="content"></div>
+    </div>
+    <div id="map" class="map"></div>
 
-      <script
+    <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
@@ -63,12 +60,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="script.js"></script>
     <script type="module" src="app.js"></script>
     <script type="module" src="controller/map.controller.js"></script>
     <script type="module" src="controller/gps.controller.js"></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js'></script> <script type="module" src="app.js"></script>
-
   </body>
 </html>
