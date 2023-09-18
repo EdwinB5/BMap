@@ -77,3 +77,5 @@ mapController.getMap().on("zoomend", function () {
   const currentZoom = mapController.getMap().getZoom();
   mapController.setCurrentZoom(currentZoom);
 });
+
+export { mapController }

@@ -1,5 +1,5 @@
 import { formatTime } from "./utils/time.js";
-
+import { mapController } from "./app.js";
 /**
  * Styles for the BMap dynamic content, including
  * JQuery document controller
@@ -114,6 +114,15 @@ async function tspContent(data, container, url) {
     // Set the initial and final time distances in the HTML
     $("#init-distance").text(formatTime(data.initialTimeDistance));
     $("#final-distance").text(formatTime(data.finalTimeDistance));
+
+    // Events for buttons of TSP dynamic map
+    $('#next-city').on('click', function() {
+      mapController.nextCity();
+    })
+
+    $('#previous-city').on('click', function() {
+      mapController.previousCity();
+    });
 
     // Get a reference to the TSP cards container
     const tspCards = $("#tsp-cards");

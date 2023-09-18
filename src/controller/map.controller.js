@@ -20,6 +20,7 @@ export class MapController {
     this.mapLayer = L.layerGroup();
     this.satellites = [];
     this.currentZoom = 0;
+    this.currentCity = 0;
   }
 
   /**
@@ -73,6 +74,44 @@ export class MapController {
   }
 
   /**
+   * Moves the map to a specified latitude and longitude coordinate with a smooth animation.
+   * @param {number} latitude - The target latitude coordinate.
+   * @param {number} longitude - The target longitude coordinate.
+   */
+  moveTo(latitude, longitude) {
+    this.map.flyTo([latitude, longitude], this.currentZoom, {
+      duration: Config.map.tsp.duration,
+      easeLinearity: Config.map.tsp.easeLinearity,
+      animate: Config.map.tsp.animate,
+    });
+  }
+
+  /**
+   * Moves to the next city in the list and updates the map accordingly.
+   */
+  nextCity() {
+    this.currentCity += 1;
+    if (this.currentCity >= this.cities.length) {
+      this.currentCity = 0;
+    }
+    const city = this.cities[this.currentCity];
+
+    this.moveTo(city.latitude, city.longitude);
+  }
+
+  /**
+   * Moves to the previous city in the list and updates the map accordingly.
+   */
+  previousCity() {
+    this.currentCity -= 1;
+    if (this.currentCity < 0) {
+      this.currentCity = this.cities.length - 1;
+    }
+    const city = this.cities[this.currentCity];
+    this.moveTo(city.latitude, city.longitude);
+  }
+
+  /**
    * Initializes the Traveling Salesman Problem (TSP) visualization on the map.
    * Centers the map on the first city of the fittest tour, adds markers for each city,
    * and connects cities with polygons based on the fittest tour.
@@ -82,16 +121,7 @@ export class MapController {
     // Get the first city from the fittest tour for map centering
     let firstCity = this.dataMap.fittestTour.tour[0];
 
-    this.map.flyTo(
-      [firstCity.latitude, firstCity.longitude],
-      this.currentZoom,
-      {
-        duration: Config.map.tsp.duration,
-        easeLinearity: Config.map.tsp.easeLinearity,
-        animate: Config.map.tsp.animate,
-      }
-    );
-
+    this.moveTo(firstCity.latitude, firstCity.longitude);
     // Add markers for each city on the map
     this.cities.forEach((city) => {
       this.addMark(city.latitude, city.longitude, city.name, city.airport);
