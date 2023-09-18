@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BMap: Source: model/city.model.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: model/city.model.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Config } from '../config.js';
+
+/**
+ * Represents a city with geographical information.
+ */
+export class City {
+  /**
+   * Earth radius constant in kilometers.
+   * @type {number}
+   * @static
+   */
+  static EARTH_RADIUS = 6371;
+
+  /**
+   * Create a new City instance.
+   * @param {string} name - The name of the city.
+   * @param {number} latitude - The latitude coordinate of the city.
+   * @param {number} longitude - The longitude coordinate of the city.
+   * @param {number} airportName - The airport name's
+   * @param {number} airportDelay - The delay at the city's airport (in hours).
+   * @param {string} airportIATA - The airport IATA of the city's
+   */
+  constructor(name, latitude, longitude, airportDelay, airportName, airportIATA) {
+    this.name = name;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.airport = {
+      airportName,
+      airportDelay,
+      airportIATA, 
+    }
+    
+    this.cityTraveled = {};
+  }
+
+  /**
+   * Get the latitude coordinate of the city.
+   * @returns {number} - The latitude.
+   */
+  getLatitude() {
+    return this.latitude;
+  }
+
+  /**
+   * Get the longitude coordinate of the city.
+   * @returns {number} - The longitude.
+   */
+  getLongitude() {
+    return this.longitude;
+  }
+
+  /**
+   * Calculate the distance and time delay to another city.
+   * @param {City} city - The destination city.
+   * @returns {Object} - An object with distance and time delay.
+   */
+  distanceTo(city) {
+    const distance = this.haversine(city);
+    const airplaneSpeed = Config.airplane.speed; // Assume constant airplane speed in km/h
+    const timeTo = distance / airplaneSpeed;
+    const timeDelay = timeTo + this.airport.airportDelay;
+
+    const toCity = city.name;
+
+    this.cityTraveled = {
+      city: toCity,
+      distance,
+      timeTo,
+      timeDelay,
+    };
+
+    return {
+      distance, // The distance between the cities in kilometers
+      timeDelay, // The time delay for reaching the destination
+    };
+  }
+
+  /**
+   * Convert degrees to radians.
+   * @param {number} degree - The angle in degrees.
+   * @returns {number} - The angle in radians.
+   */
+  toRadian(degree) {
+    return (degree * Math.PI) / 180;
+  }
+
+  /**
+   * Calculate the Haversine distance to another city.
+   * @param {City} city - The destination city.
+   * @returns {number} - The Haversine distance between the two cities.
+   * @see {@link https://parzibyte.me/blog/2022/09/07/javascript-distancia-entre-2-coordenadas/}
+   */
+  haversine(city) {
+    const currentCityLatitude = this.toRadian(this.getLatitude());
+    const currentCityLongitude = this.toRadian(this.getLongitude());
+
+    const nextCityLatitude = this.toRadian(city.getLatitude());
+    const nextCityLongitude = this.toRadian(city.getLongitude());
+
+    const dLatitude = nextCityLatitude - currentCityLatitude;
+    const dLongitude = nextCityLongitude - currentCityLongitude;
+
+    let havSin =
+      Math.pow(Math.sin(dLatitude / 2.0), 2) +
+      Math.cos(currentCityLatitude) *
+        Math.cos(nextCityLatitude) *
+        Math.pow(Math.sin(dLongitude / 2.0), 2);
+
+    havSin = 2 * Math.atan2(Math.sqrt(havSin), Math.sqrt(1 - havSin));
+
+    return City.EARTH_RADIUS * havSin;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="GPSController.html">GPSController</a></li><li><a href="GeneticAlgorithm.html">GeneticAlgorithm</a></li><li><a href="GeneticAlgorithmController.html">GeneticAlgorithmController</a></li><li><a href="MapController.html">MapController</a></li><li><a href="Population.html">Population</a></li><li><a href="Tour_Tour.html">Tour</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TourManager">TourManager</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#gpsContent">gpsContent</a></li><li><a href="global.html#initMenu">initMenu</a></li><li><a href="global.html#loadContent">loadContent</a></li><li><a href="global.html#tspContent">tspContent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Sep 18 2023 16:27:07 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

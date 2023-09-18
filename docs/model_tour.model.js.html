@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BMap: Source: model/tour.model.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: model/tour.model.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Class Tour represents a tour of cities.
+ */
+import { TourManager } from "./tourmanager.model.js";
+
+export class Tour {
+  // Holds the tour of cities
+  tour = [];
+
+  // Cache
+  fitness = 0;
+  distanceTime = 0;
+
+  /**
+   * Constructor for Tour class.
+   * @param {Array} tour - An optional array representing the tour of cities.
+   */
+  constructor(tour) {
+    // Initialize an empty tour
+    this.tour = [];
+    this.blankTour();
+
+    // If a tour array is provided, use it
+    if (tour) {
+      this.tour = tour;
+    }
+  }
+
+  /**
+   * Initialize the tour with null values.
+   */
+  blankTour() {
+    for (let i = 0; i &lt; TourManager.numberOfCities(); i++) {
+      this.tour.push(null);
+    }
+  }
+
+  /**
+   * Generates a random individual tour by shuffling the cities.
+   */
+  generateIndividual() {
+    for (
+      let cityIndex = 0;
+      cityIndex &lt; TourManager.numberOfCities();
+      cityIndex++
+    ) {
+      this.setCity(cityIndex, TourManager.getCity(cityIndex));
+    }
+
+    this.shuffle(this.tour);
+  }
+
+  /**
+   * Get a city from the tour by its position.
+   * @param {number} tourPosition - The position of the city in the tour.
+   * @returns {City|null} - The city at the specified position, or null if not set.
+   */
+  getCity(tourPosition) {
+    return this.tour[tourPosition];
+  }
+
+  /**
+   * Set a city at a specific position in the tour.
+   * @param {number} tourPosition - The position where the city should be set.
+   * @param {City} city - The city to set in the tour.
+   */
+  setCity(tourPosition, city) {
+    this.tour[tourPosition] = city;
+
+    // If the tour has been altered, reset the fitness and distanceTime
+    this.fitness = 0;
+    this.distanceTime = 0;
+  }
+
+  /**
+   * Get the fitness of the tour.
+   * @returns {number} - The fitness value of the tour.
+   */
+  getFitness() {
+    if (this.fitness === 0) {
+      this.fitness = 1 / this.getDistanceTime();
+    }
+
+    return this.fitness;
+  }
+
+  /**
+   * Calculate the total distanceTime of the tour.
+   * @returns {number} - The total distance of the tour.
+   */
+  getDistanceTime() {
+    if (this.distanceTime === 0) {
+      let tourDistance = 0;
+      for (let cityIndex = 0; cityIndex &lt; this.tourSize(); cityIndex++) {
+        let fromCity = this.getCity(cityIndex);
+        let destinationCity;
+        if (cityIndex + 1 &lt; this.tourSize()) {
+          destinationCity = this.getCity(cityIndex + 1);
+        } else {
+          destinationCity = this.getCity(0);
+        }
+        tourDistance += fromCity.distanceTo(destinationCity).timeDelay;
+      }
+      this.distanceTime = tourDistance;
+    }
+    return this.distanceTime;
+  }
+
+  /**
+   * Get the number of cities in the tour.
+   * @returns {number} - The number of cities in the tour.
+   */
+  tourSize() {
+    return this.tour.length;
+  }
+
+  /**
+   * Check if the tour contains a specific city.
+   * @param {City} city - The city to check for.
+   * @returns {boolean} - True if the city is in the tour, otherwise false.
+   */
+  containsCity(city) {
+    return this.tour.includes(city);
+  }
+
+  /**
+   * Shuffle the elements of an array randomly.
+   * @param {Array} array - The array to be shuffled.
+   */
+  shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="GPSController.html">GPSController</a></li><li><a href="GeneticAlgorithm.html">GeneticAlgorithm</a></li><li><a href="GeneticAlgorithmController.html">GeneticAlgorithmController</a></li><li><a href="MapController.html">MapController</a></li><li><a href="Population.html">Population</a></li><li><a href="Tour_Tour.html">Tour</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TourManager">TourManager</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#gpsContent">gpsContent</a></li><li><a href="global.html#initMenu">initMenu</a></li><li><a href="global.html#loadContent">loadContent</a></li><li><a href="global.html#tspContent">tspContent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Sep 18 2023 16:27:07 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

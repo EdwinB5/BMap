@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BMap: Class: GeneticAlgorithm</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: GeneticAlgorithm</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>GeneticAlgorithm<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Class GA manages algorithms for evolving a population.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="GeneticAlgorithm"><span class="type-signature"></span>new GeneticAlgorithm<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_genetic.algorithm.js.html">model/genetic.algorithm.js</a>, <a href="model_genetic.algorithm.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".crossover"><span class="type-signature">(static) </span>crossover<span class="signature">(parent1, parent2)</span><span class="type-signature"> &rarr; {<a href="Tour.html">Tour</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies crossover to a set of parents and creates offspring.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Tour.html">Tour</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first parent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Tour.html">Tour</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second parent.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_genetic.algorithm.js.html">model/genetic.algorithm.js</a>, <a href="model_genetic.algorithm.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The child tour.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Tour.html">Tour</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".evolvePopulation"><span class="type-signature">(static) </span>evolvePopulation<span class="signature">(pop)</span><span class="type-signature"> &rarr; {<a href="Population.html">Population</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Evolves a population over one generation.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Population.html">Population</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The current population.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_genetic.algorithm.js.html">model/genetic.algorithm.js</a>, <a href="model_genetic.algorithm.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The new population after evolution.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Population.html">Population</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".mutate"><span class="type-signature">(static) </span>mutate<span class="signature">(tour)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mutate a tour using swap mutation.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tour</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Tour.html">Tour</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The tour to be mutated.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_genetic.algorithm.js.html">model/genetic.algorithm.js</a>, <a href="model_genetic.algorithm.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".tournamentSelection"><span class="type-signature">(static) </span>tournamentSelection<span class="signature">(pop)</span><span class="type-signature"> &rarr; {<a href="Tour.html">Tour</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Selects a candidate tour for crossover using tournament selection.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Population.html">Population</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The current population.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model_genetic.algorithm.js.html">model/genetic.algorithm.js</a>, <a href="model_genetic.algorithm.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The selected tour.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Tour.html">Tour</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="GPSController.html">GPSController</a></li><li><a href="GeneticAlgorithm.html">GeneticAlgorithm</a></li><li><a href="GeneticAlgorithmController.html">GeneticAlgorithmController</a></li><li><a href="MapController.html">MapController</a></li><li><a href="Population.html">Population</a></li><li><a href="Tour_Tour.html">Tour</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TourManager">TourManager</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#gpsContent">gpsContent</a></li><li><a href="global.html#initMenu">initMenu</a></li><li><a href="global.html#loadContent">loadContent</a></li><li><a href="global.html#tspContent">tspContent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Sep 18 2023 16:27:07 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

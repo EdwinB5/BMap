@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BMap: Source: model/genetic.algorithm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: model/genetic.algorithm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Population } from "./population.model.js";
+import { Tour } from "./tour.model.js";
+import { Config } from "../config.js";
+
+/**
+ * Class GA manages algorithms for evolving a population.
+ */
+export class GeneticAlgorithm {
+  /* GA parameters */
+  static mutationRate = Config.geneticAlgorithm.mutationRate;
+  static tournamentSize = Config.geneticAlgorithm.tournamentSize;
+  static elitism = Config.geneticAlgorithm.elitism;
+
+  /**
+   * Evolves a population over one generation.
+   * @param {Population} pop - The current population.
+   * @returns {Population} - The new population after evolution.
+   */
+  static evolvePopulation(pop) {
+    const newPopulation = new Population(pop.populationSize(), false);
+
+    // Keep our best individual if elitism is enabled
+    let elitismOffset = 0;
+    if (this.elitism) {
+      newPopulation.saveTour(0, pop.getFittest());
+      elitismOffset = 1;
+    }
+
+    // Crossover population
+    // Loop over the new population's size and create individuals from
+    // current population
+    for (let i = elitismOffset; i &lt; newPopulation.populationSize(); i++) {
+      // Select parents
+      const parent1 = this.tournamentSelection(pop);
+      const parent2 = this.tournamentSelection(pop);
+      // Crossover parents
+      const child = this.crossover(parent1, parent2);
+      // Add child to new population
+      newPopulation.saveTour(i, child);
+    }
+
+    // Mutate the new population a bit to add some new genetic material
+    for (let i = elitismOffset; i &lt; newPopulation.populationSize(); i++) {
+      this.mutate(newPopulation.getTour(i));
+    }
+
+    return newPopulation;
+  }
+
+  /**
+   * Applies crossover to a set of parents and creates offspring.
+   * @param {Tour} parent1 - The first parent.
+   * @param {Tour} parent2 - The second parent.
+   * @returns {Tour} - The child tour.
+   */
+  static crossover(parent1, parent2) {
+    // Create a new child tour
+    const child = new Tour();
+
+    // Get start and end sub-tour positions for parent1's tour
+    const startPos = Math.floor(Math.random() * parent1.tourSize());
+    const endPos = Math.floor(Math.random() * parent1.tourSize());
+
+    // Loop and add the sub-tour from parent1 to our child
+    for (let i = 0; i &lt; child.tourSize(); i++) {
+      // If our start position is less than the end position
+      if (startPos &lt; endPos &amp;&amp; i > startPos &amp;&amp; i &lt; endPos) {
+        child.setCity(i, parent1.getCity(i));
+      } // If our start position is larger
+      else if (startPos > endPos) {
+        if (!(i &lt; startPos &amp;&amp; i > endPos)) {
+          child.setCity(i, parent1.getCity(i));
+        }
+      }
+    }
+
+    // Loop through parent2's city tour
+    for (let i = 0; i &lt; parent2.tourSize(); i++) {
+      // If child doesn't have the city, add it
+      if (!child.containsCity(parent2.getCity(i))) {
+        // Loop to find a spare position in the child's tour
+        for (let ii = 0; ii &lt; child.tourSize(); ii++) {
+          // Spare position found, add city
+          if (child.getCity(ii) === null) {
+            child.setCity(ii, parent2.getCity(i));
+            break;
+          }
+        }
+      }
+    }
+    return child;
+  }
+
+  /**
+   * Mutate a tour using swap mutation.
+   * @param {Tour} tour - The tour to be mutated.
+   */
+  static mutate(tour) {
+    // Loop through tour cities
+    for (let tourPos1 = 0; tourPos1 &lt; tour.tourSize(); tourPos1++) {
+      // Apply mutation rate
+      if (Math.random() &lt; this.mutationRate) {
+        // Get a second random position in the tour
+        const tourPos2 = Math.floor(Math.random() * tour.tourSize());
+
+        // Get the cities at target position in tour
+        const city1 = tour.getCity(tourPos1);
+        const city2 = tour.getCity(tourPos2);
+
+        // Swap them around
+        tour.setCity(tourPos2, city1);
+        tour.setCity(tourPos1, city2);
+      }
+    }
+  }
+
+  /**
+   * Selects a candidate tour for crossover using tournament selection.
+   * @param {Population} pop - The current population.
+   * @returns {Tour} - The selected tour.
+   */
+  static tournamentSelection(pop) {
+    // Create a tournament population
+    const tournament = new Population(this.tournamentSize, false);
+    // For each place in the tournament, get a random candidate tour and add it
+    for (let i = 0; i &lt; this.tournamentSize; i++) {
+      const randomId = Math.floor(Math.random() * pop.populationSize());
+      tournament.saveTour(i, pop.getTour(randomId));
+    }
+    // Get the fittest tour
+    const fittest = tournament.getFittest();
+    return fittest;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="City.html">City</a></li><li><a href="GPSController.html">GPSController</a></li><li><a href="GeneticAlgorithm.html">GeneticAlgorithm</a></li><li><a href="GeneticAlgorithmController.html">GeneticAlgorithmController</a></li><li><a href="MapController.html">MapController</a></li><li><a href="Population.html">Population</a></li><li><a href="Tour_Tour.html">Tour</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TourManager">TourManager</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#formatTime">formatTime</a></li><li><a href="global.html#gpsContent">gpsContent</a></li><li><a href="global.html#initMenu">initMenu</a></li><li><a href="global.html#loadContent">loadContent</a></li><li><a href="global.html#tspContent">tspContent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Sep 18 2023 16:27:07 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
