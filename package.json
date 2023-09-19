@@ -2,10 +2,10 @@
   "name": "bmap",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:app": "node src/app.js"
+    "dev:app": "node src/app.js",
+    "build": "parcel build src/index.html"
   },
   "author": "",
   "license": "ISC",

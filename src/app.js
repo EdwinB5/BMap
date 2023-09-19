@@ -11,12 +11,19 @@ const gpsData = `./data/${Config.map.gps.file}.json`;
 const tspButton = document.getElementById("tsp");
 const gpsButton = document.getElementById("gps");
 
-const citiesList = await fetchData(dataCities);
-const gpsCoords = await fetchData(gpsData);
+//TODO Fix await
 
 const mapController = new MapController();
-const algorithmController = new GeneticAlgorithmController(citiesList);
 const gpsController = new GPSController();
+
+let algorithmController;
+let gpsCoords;
+
+(async () => {
+  const citiesList = await fetchData(dataCities);
+  gpsCoords = await fetchData(gpsData);
+  algorithmController = new GeneticAlgorithmController(citiesList);
+})();
 
 let dataContent = {};
 
@@ -78,4 +85,4 @@ mapController.getMap().on("zoomend", function () {
   mapController.setCurrentZoom(currentZoom);
 });
 
-export { mapController }
+export { mapController };
