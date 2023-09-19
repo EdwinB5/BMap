@@ -41,7 +41,7 @@ mapController.initMap();
 tspButton.addEventListener("click", async function (event) {
   event.preventDefault();
   mapController.cleanMap();
-  mapController.setDataMap(algorithmController.runGeneticAlgorithm());
+  mapController.setDataMap(await algorithmController.runGeneticAlgorithm());
   mapController.initMapTSP();
   dataContent = mapController.getDataMap();
   // Load dynamic content
