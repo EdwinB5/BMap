@@ -25,6 +25,26 @@ let gpsCoords;
 
 let dataContent = {};
 
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleSidebarButton = document.getElementById('toggle-sidebar-button');
+  const sidebar = document.querySelector('.sidebar');
+  const map = document.querySelector('.map');
+  const cont = document.getElementById('cont');
+
+  
+  toggleSidebarButton.addEventListener('click', function () {
+    sidebar.classList.toggle('open');
+    sidebar.classList.toggle('closed');
+    sidebar.classList.toggle('hidden-sidebar');
+    map.classList.toggle('hidden-sidebar');
+    map.classList.toggle('full-width'); 
+    map.classList.toggle('open'); 
+    cont.classList.toggle('closed'); 
+    cont.classList.toggle('open');
+  });
+});
+
+
 /**
  * Init page map
  */

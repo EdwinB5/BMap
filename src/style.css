@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 18px;
   margin: 0;
   font-weight: 400;
 }
@@ -30,6 +30,7 @@ a:hover {
   left: 0;
   overflow: hidden;
   border-right: 1px solid rgba(0, 0, 0, 0.25);
+  
 }
 
 .pad2 {
@@ -200,10 +201,11 @@ a:hover {
   font: 12px;
   color: #f2f2f2;
   position: fixed;
-  left: 20%;
   top: 13%;
   padding: 4px;
-  z-index: 10;
+  z-index: 1;
+  transition: left 0.3s;
+
 }
 
 .icon {
@@ -297,7 +299,7 @@ a:hover {
   padding: 10px;
   color: wheat;
   opacity: 0.4;
-  font-size: 12px;
+  font-size: 8px;
 }
 
 .footer {
@@ -314,11 +316,11 @@ a:hover {
 
 .footer h2 {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 8x;
 }
 
 .footer p {
-  font-size: 12px;
+  font-size: 8px;
 }
 
 .footer p, h2 {
@@ -404,4 +406,106 @@ a:hover {
 .information p{
   color: white;
   font-weight: bold;
+}
+
+
+
+.hidden-sidebar {
+  width: 0;
+  left: -100%;
+  transition: width 0.3s, left 0.3s;
+}
+
+/* Estilos para mostrar la barra lateral en el diseño normal */
+.visible-sidebar {
+  width: 20%; /* O el ancho deseado cuando se muestra */
+  left: 0;
+}
+
+.full-width {
+  width: 100%;
+  left: 0;
+  transition: width 0.3s, left 0.3s;
+}
+
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* O el ancho deseado para dispositivos móviles */
+    position: relative; /* Cambia la posición para que el contenido fluya */
+    left: 0;
+  }
+  .map {
+    left: 0;
+    width: 100%;
+  }
+
+  .sidebar.closed {
+    width: 0;
+    left: -100%;
+  }
+
+  .sidebar.open {
+    width: 20%; /* O el ancho deseado cuando se muestra */
+    left: 0;
+  }
+  .map.open {
+    left: 20%; 
+    width: 80%;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+  .info {
+    padding: 15px; /* Reducir el relleno */
+    font-size: 12px; /* Reducir el tamaño de fuente */
+  }
+  .info h1 {
+    font-size: 16px; /* Reducir el tamaño de fuente del título */
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .heading {
+    font-size: 18px;
+    padding: 10px;
+  }
+  .listings .item {
+    padding: 5px;
+  }
+}
+
+
+/* Estilos cuando la barra lateral esté cerrada en una pantalla normal */
+@media (min-width: 769px) {
+  #cont.closed {
+    left: 2%;
+  }
+}
+
+/* Estilos cuando la barra lateral esté cerrada en una pantalla móvil */
+@media (max-width: 768px) {
+  #cont.closed {
+    left: 20%;
+  }
+}
+
+/* Estilos cuando la barra lateral esté abierta en una pantalla normal */
+@media (min-width: 769px) {
+  #cont.open {
+    left: 20%; /* O el valor deseado cuando la barra esté abierta en una pantalla normal */
+  }
+}
+
+/* Estilos cuando la barra lateral esté abierta en una pantalla móvil */
+@media (max-width: 768px) {
+  #cont.open {
+    left: 10%; /* O el valor deseado cuando la barra esté abierta en una pantalla móvil */
+  }
 }
