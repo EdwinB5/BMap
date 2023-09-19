@@ -60,7 +60,7 @@ a:hover {
   height: 100%;
   overflow: auto;
   padding-bottom: 60px;
-  background-color: #0d264e;
+  background-color: #3b86f7;
 }
 
 .listings .item {
@@ -341,4 +341,67 @@ a:hover {
     align-items: center;
     display: flex;
   }
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.controller {
+  margin: 1em auto;
+  width: 280px;
+  text-align: center;
+  background-color: #eee;
+  padding: 0.5em 0;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6);
+  border-radius: 8px;
+  cursor: pointer; /* Agrega un puntero al pasar el mouse */
+}
+
+.controller:hover {
+  color: #eee;
+  background-color: #333;
+}
+
+/* Estilos para los botones "previous-city" y "next-city" */
+.previous-city:before {
+  content: '\25c4'; /* Flecha izquierda */
+  padding-right: 0.5em;
+}
+
+.next-city:before {
+  content: '\25ba'; /* Flecha derecha */
+  padding-left: 0.5em;
+}
+
+.info{
+  padding: 35px;
+  background-color: #0146ad   ;
+  border-radius: 5%;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: sans-serif;
+  border-color: #b52beb !important;
+}
+.info h1{
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.information h1{
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.information p{
+  color: white;
+  font-weight: bold;
 }

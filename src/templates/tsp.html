@@ -2,12 +2,17 @@
   <head></head>
   <body>
     <div>
-      <button type="button" id="previous-city"><-</button>
-      <button type="button" id="next-city">-></button>
-      <h1><strong>Genetic Algorithm TSP</strong></h1>
-      <br>
-      <p>Initial time distance: <span id="init-distance"></span></p>
-      <p>Final time distance: <span id="final-distance"></span></p>
+      <div class="button-container">
+
+        <button class="controller previous-city" id="previous-city"></button>
+        <button class="controller next-city" id="next-city"></button>
+      </div>
+      <div class="information"> 
+        <h1><strong>Genetic Algorithm TSP</strong></h1>
+        <br>
+        <p>Initial time distance: <span id="init-distance"></span></p>
+        <p>Final time distance: <span id="final-distance"></span></p>
+      <div>
       <div id="tsp-cards"></div>
     </div>
   </body>
