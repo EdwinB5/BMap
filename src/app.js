@@ -11,8 +11,6 @@ const gpsData = `./data/${Config.map.gps.file}.json`;
 const tspButton = document.getElementById("tsp");
 const gpsButton = document.getElementById("gps");
 
-//TODO Fix await
-
 const mapController = new MapController();
 const gpsController = new GPSController();
 
@@ -85,4 +83,4 @@ mapController.getMap().on("zoomend", function () {
   mapController.setCurrentZoom(currentZoom);
 });
 
-export { mapController };
+export { mapController }
