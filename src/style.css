@@ -391,6 +391,7 @@ a:hover {
   font-family: sans-serif;
   border-color: #b52beb !important;
 }
+
 .info h1{
   color: white;
   font-size: 20px;
@@ -408,6 +409,9 @@ a:hover {
   font-weight: bold;
 }
 
+.information {
+  margin-bottom: 80px;
+}
 
 
 .hidden-sidebar {
